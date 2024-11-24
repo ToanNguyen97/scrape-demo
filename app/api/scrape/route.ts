@@ -151,7 +151,12 @@ export const POST = async (request: NextRequest) => {
       console.log('click');
 
       await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+      console.log('click xong');
+
       await sleep(3000)
+      await page.screenshot({ path: 'screenshot.png', fullPage: true });
+      const html = await page.content();
+      console.log(html);
       await page.waitForSelector('div[data-automation-id="workExperienceSection"]', { timeout: 60000});
       console.log('1');
 
