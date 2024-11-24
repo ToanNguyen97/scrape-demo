@@ -41,7 +41,16 @@ export const POST = async (request: NextRequest) => {
     const params: ScrapePayload = await request.json()
     const url = params.url
     const browser = await getBrowser()
-    const page = await browser.newPage()
+    const context = await browser.newContext({
+      proxy: {
+        server: 'brd.superproxy.io:33335',
+        username: 'brd-customer-hl_3a75de09-zone-data_center',
+        password: 'y80~#eg!f-9%'
+      },
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    })
+    const page = await context.newPage()
+
     await page.goto(
       `${params.url}`,
       { waitUntil: 'load', timeout: 30000 }
@@ -152,7 +161,11 @@ export const POST = async (request: NextRequest) => {
 
       await page.click('button[data-automation-id="bottom-navigation-next-button"]');
       console.log('click xong');
-
+      const elementHtml = await page.evaluate(() => {
+        const element = document.querySelector('div[data-automation-id="workExperienceSection"]');
+        return element ? element.outerHTML : 'Element không tồn tại';
+      });
+      console.log(elementHtml);
     }
 
     // const handleExperienceTab = async () => {
