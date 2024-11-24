@@ -22,7 +22,6 @@ async function getBrowser() {
       'https://pic.origapp.com/chromium-v123.0.1-pack.tar'
     )
     console.log('executablePath', executablePath);
-
     const browser = await chromium.launch({
       args: chromiumBrowser.args,
       executablePath,
