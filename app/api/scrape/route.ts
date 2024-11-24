@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server'
 import chromiumBrowser from '@sparticuz/chromium'
 import { errorResponse, successResponse } from '../responseHandler'
 import { chromium } from 'playwright'
-import path from 'path';
+// import path from 'path';
 
 export const maxDuration = 300
 
@@ -157,123 +157,123 @@ export const POST = async (request: NextRequest) => {
 
     }
 
-    const handleExperienceTab = async () => {
-      await page.waitForSelector('div[data-automation-id="workExperienceSection"]');
-      await page.click('div[data-automation-id="workExperienceSection"] button[data-automation-id="Add"]');
+    // const handleExperienceTab = async () => {
+    //   await page.waitForSelector('div[data-automation-id="workExperienceSection"]');
+    //   await page.click('div[data-automation-id="workExperienceSection"] button[data-automation-id="Add"]');
 
-      await page.fill('[data-automation-id="jobTitle"]', 'Senior FullStack Developer')
-      await page.fill('[data-automation-id="company"]', 'Betamind')
-      await page.click('input[data-automation-id="currentlyWorkHere"]')
-      await page.fill('[data-automation-id="dateSectionMonth-input"]', '12')
-      await page.fill('[data-automation-id="dateSectionYear-input"]', '2023')
-      await page.fill('[data-automation-id="description"]', `I'm responsible for helping member resolve task and clear technical, setup auto deployment, setup server and release project.`)
+    //   await page.fill('[data-automation-id="jobTitle"]', 'Senior FullStack Developer')
+    //   await page.fill('[data-automation-id="company"]', 'Betamind')
+    //   await page.click('input[data-automation-id="currentlyWorkHere"]')
+    //   await page.fill('[data-automation-id="dateSectionMonth-input"]', '12')
+    //   await page.fill('[data-automation-id="dateSectionYear-input"]', '2023')
+    //   await page.fill('[data-automation-id="description"]', `I'm responsible for helping member resolve task and clear technical, setup auto deployment, setup server and release project.`)
 
-      await page.click('div[data-automation-id="workExperienceSection"] button[data-automation-id="Add Another"]');
-      await page.fill('div[data-automation-id="workExperience-2"] [data-automation-id="jobTitle"]', 'Senior FullStack Developer')
-      await page.fill('div[data-automation-id="workExperience-2"] [data-automation-id="company"]', 'Denova')
-      await sleep(2000)
-      await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-startDate"] [data-automation-id="dateSectionMonth-input"]', '12')
-      await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-startDate"] [data-automation-id="dateSectionYear-input"]', '2022')
-      await sleep(2000)
-      await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-endDate"] [data-automation-id="dateSectionMonth-input"]', '12')
-      await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-endDate"] [data-automation-id="dateSectionYear-input"]', '2023')
-      await sleep(2000)
-      await page.fill('div[data-automation-id="workExperience-2"] [data-automation-id="description"]', `I'm responsible for helping member resolve task and clear technical, setup auto deployment, setup server and release project.`)
+    //   await page.click('div[data-automation-id="workExperienceSection"] button[data-automation-id="Add Another"]');
+    //   await page.fill('div[data-automation-id="workExperience-2"] [data-automation-id="jobTitle"]', 'Senior FullStack Developer')
+    //   await page.fill('div[data-automation-id="workExperience-2"] [data-automation-id="company"]', 'Denova')
+    //   await sleep(2000)
+    //   await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-startDate"] [data-automation-id="dateSectionMonth-input"]', '12')
+    //   await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-startDate"] [data-automation-id="dateSectionYear-input"]', '2022')
+    //   await sleep(2000)
+    //   await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-endDate"] [data-automation-id="dateSectionMonth-input"]', '12')
+    //   await page.fill('div[data-automation-id="workExperience-2"] div[data-automation-id="formField-endDate"] [data-automation-id="dateSectionYear-input"]', '2023')
+    //   await sleep(2000)
+    //   await page.fill('div[data-automation-id="workExperience-2"] [data-automation-id="description"]', `I'm responsible for helping member resolve task and clear technical, setup auto deployment, setup server and release project.`)
 
-      // upload resume
-      const tempFilePath = path.join(process.cwd(), 'public', 'NguyenVanToan.pdf');
-      const fileInputSelector = '[data-automation-id="file-upload-input-ref"]';
-      await page.setInputFiles(fileInputSelector, tempFilePath);
-      await page.waitForSelector('div[data-automation-id="file-upload-successful"]');
-      await sleep(1000)
-      await page.click('button[data-automation-id="bottom-navigation-next-button"]');
-    }
+    //   // upload resume
+    //   const tempFilePath = path.join(process.cwd(), 'public', 'NguyenVanToan.pdf');
+    //   const fileInputSelector = '[data-automation-id="file-upload-input-ref"]';
+    //   await page.setInputFiles(fileInputSelector, tempFilePath);
+    //   await page.waitForSelector('div[data-automation-id="file-upload-successful"]');
+    //   await sleep(1000)
+    //   await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+    // }
 
-    const handleApplicationQuestion = async () => {
-      await page.waitForSelector('div[data-automation-id="primaryQuestionnairePage"]');
-      // desired start date
-      if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
-        await page.click('button[data-automation-id="4831c1789a580101ff6244afd19d0001"]')
-        await page.click('li[data-value="95b22ca12b3001147ba8c7bcef180002"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="4831c1789a580101ff62454aff8e0002"]')
-        await page.click('li[data-value="95b22ca12b3001147ba8bcd97fb10000"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="4831c1789a580101ff62454aff8e0005"]')
-        await page.click('li[data-value="95b22ca12b3001147ba8d5a63ae40002"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="4831c1789a580101ff62454aff8e0008"]')
-        await page.click('li[data-value="95b22ca12b3001147ba8e9213ff60000"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="4831c1789a58010204e95954a3290000"]')
-        await page.click('li[data-value="4831c1789a58010200628e080d190000"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="4831c1789a58010204e959eeb33b0003"]')
-        await page.click('li[data-value="4831c1789a58010200628ea1daa50000"]')
-      } else {
-        await page.fill('[data-automation-id="31fecac5cc9b1007d723ee57c9650000"]', '15 days after I get the offer');
-        await page.fill('[data-automation-id="31fecac5cc9b1007d723ee57c9650001"]', '15 days');
-        await page.click('button[data-automation-id="31fecac5cc9b1007d723eef1624d0000"]')
-        await page.click('li[data-value="31fecac5cc9b1007d7003dc63d8c0000"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="31fecac5cc9b1007d7c3d685adbc0000"]')
-        await page.click('li[data-value="31fecac5cc9b1007d77ebb6663a80001"]')
-        await sleep(2000)
-        await page.click('button[data-automation-id="31fecac5cc9b1007d723eef1624d0001"]')
-        await page.click('li[data-value="31fecac5cc9b1007d7211f1754ec0000"]')
-      }
-      await sleep(1000)
-      await page.click('button[data-automation-id="bottom-navigation-next-button"]');
-    }
+    // const handleApplicationQuestion = async () => {
+    //   await page.waitForSelector('div[data-automation-id="primaryQuestionnairePage"]');
+    //   // desired start date
+    //   if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
+    //     await page.click('button[data-automation-id="4831c1789a580101ff6244afd19d0001"]')
+    //     await page.click('li[data-value="95b22ca12b3001147ba8c7bcef180002"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="4831c1789a580101ff62454aff8e0002"]')
+    //     await page.click('li[data-value="95b22ca12b3001147ba8bcd97fb10000"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="4831c1789a580101ff62454aff8e0005"]')
+    //     await page.click('li[data-value="95b22ca12b3001147ba8d5a63ae40002"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="4831c1789a580101ff62454aff8e0008"]')
+    //     await page.click('li[data-value="95b22ca12b3001147ba8e9213ff60000"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="4831c1789a58010204e95954a3290000"]')
+    //     await page.click('li[data-value="4831c1789a58010200628e080d190000"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="4831c1789a58010204e959eeb33b0003"]')
+    //     await page.click('li[data-value="4831c1789a58010200628ea1daa50000"]')
+    //   } else {
+    //     await page.fill('[data-automation-id="31fecac5cc9b1007d723ee57c9650000"]', '15 days after I get the offer');
+    //     await page.fill('[data-automation-id="31fecac5cc9b1007d723ee57c9650001"]', '15 days');
+    //     await page.click('button[data-automation-id="31fecac5cc9b1007d723eef1624d0000"]')
+    //     await page.click('li[data-value="31fecac5cc9b1007d7003dc63d8c0000"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="31fecac5cc9b1007d7c3d685adbc0000"]')
+    //     await page.click('li[data-value="31fecac5cc9b1007d77ebb6663a80001"]')
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="31fecac5cc9b1007d723eef1624d0001"]')
+    //     await page.click('li[data-value="31fecac5cc9b1007d7211f1754ec0000"]')
+    //   }
+    //   await sleep(1000)
+    //   await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+    // }
 
-    const handleVoluntaryDisclosures = async () => {
-      await page.waitForSelector('div[data-automation-id="voluntaryDisclosuresPage"]');
-      if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
-        await page.click('button[data-automation-id="gender"]')
-        await page.click('li[data-value="95b22ca12b3001147b97b799876f0000"]') // male
-        await sleep(2000)
-        await page.click('button[data-automation-id="ethnicityDropdown"]')
-        await page.click('li[data-value="95b22ca12b3001147beda66edba00000"]') // asian
-        await sleep(2000)
-        await page.click('button[data-automation-id="hispanicOrLatino"]')
-        await page.click('li[data-value="2"]') // no
-        await sleep(2000)
-        await page.click('button[data-automation-id="veteranStatus"]')
-        await page.click('li[data-value="95b22ca12b3001147ba0f93759920000"]') // no
-      }
-      const checkAgree = page.locator('div[data-automation-id="formField-formField-agreementCheckbox"] label')
-      await checkAgree.scrollIntoViewIfNeeded();
-      await checkAgree.click({force: true})
-      await sleep(2000)
-      await page.click('button[data-automation-id="bottom-navigation-next-button"]');
-      await sleep(1000)
-    }
+    // const handleVoluntaryDisclosures = async () => {
+    //   await page.waitForSelector('div[data-automation-id="voluntaryDisclosuresPage"]');
+    //   if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
+    //     await page.click('button[data-automation-id="gender"]')
+    //     await page.click('li[data-value="95b22ca12b3001147b97b799876f0000"]') // male
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="ethnicityDropdown"]')
+    //     await page.click('li[data-value="95b22ca12b3001147beda66edba00000"]') // asian
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="hispanicOrLatino"]')
+    //     await page.click('li[data-value="2"]') // no
+    //     await sleep(2000)
+    //     await page.click('button[data-automation-id="veteranStatus"]')
+    //     await page.click('li[data-value="95b22ca12b3001147ba0f93759920000"]') // no
+    //   }
+    //   const checkAgree = page.locator('div[data-automation-id="formField-formField-agreementCheckbox"] label')
+    //   await checkAgree.scrollIntoViewIfNeeded();
+    //   await checkAgree.click({force: true})
+    //   await sleep(2000)
+    //   await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+    //   await sleep(1000)
+    // }
 
-    const handleSelfIdentity = async () => {
-      const isExisted = await page.locator('div[data-automation-id="previousWorker"]').count();
-      if (isExisted) {
-        if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
-          await page.fill('input[data-automation-id="name"]', 'June')
-          const date = new Date()
-          await page.fill('input[data-automation-id="dateSectionMonth-input"]', date.getMonth() + 1 > 9 ? String(date.getMonth() + 1) : `0${date.getMonth() + 1}`)
-          await sleep(1000)
-          await page.fill('input[data-automation-id="dateSectionDay-input"]', date.getDate() > 9 ? String(date.getDate()) : `0${date.getDate()}`)
-          await sleep(1000)
-          await page.fill('input[data-automation-id="dateSectionYear-input"]', date.getFullYear().toString())
-          await sleep(1000)
-          await page.waitForSelector('div[data-automation-id="formField-disability"]');
-          await page.click('input[id="64cbff5f364f10000aeec521b4ec0000"]')
-          await sleep(1000)
-        }
-        await page.click('button[data-automation-id="bottom-navigation-next-button"]');
-      }
-    }
-    const handleReviewPage = async () => {
-      await page.waitForSelector('div[data-automation-id="reviewJobApplicationPage"]');
-      await page.click('button[data-automation-id="bottom-navigation-next-button"]');
-      await page.waitForSelector('div[data-automation-id="candidateHomeTaskModal"]')
-      await sleep(1000)
-    }
+    // const handleSelfIdentity = async () => {
+    //   const isExisted = await page.locator('div[data-automation-id="previousWorker"]').count();
+    //   if (isExisted) {
+    //     if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
+    //       await page.fill('input[data-automation-id="name"]', 'June')
+    //       const date = new Date()
+    //       await page.fill('input[data-automation-id="dateSectionMonth-input"]', date.getMonth() + 1 > 9 ? String(date.getMonth() + 1) : `0${date.getMonth() + 1}`)
+    //       await sleep(1000)
+    //       await page.fill('input[data-automation-id="dateSectionDay-input"]', date.getDate() > 9 ? String(date.getDate()) : `0${date.getDate()}`)
+    //       await sleep(1000)
+    //       await page.fill('input[data-automation-id="dateSectionYear-input"]', date.getFullYear().toString())
+    //       await sleep(1000)
+    //       await page.waitForSelector('div[data-automation-id="formField-disability"]');
+    //       await page.click('input[id="64cbff5f364f10000aeec521b4ec0000"]')
+    //       await sleep(1000)
+    //     }
+    //     await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+    //   }
+    // }
+    // const handleReviewPage = async () => {
+    //   await page.waitForSelector('div[data-automation-id="reviewJobApplicationPage"]');
+    //   await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+    //   await page.waitForSelector('div[data-automation-id="candidateHomeTaskModal"]')
+    //   await sleep(1000)
+    // }
 
 
     await signIn()
