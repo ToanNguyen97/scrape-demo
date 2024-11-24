@@ -21,13 +21,11 @@ async function getBrowser() {
     const executablePath = await chromiumBrowser.executablePath(
       'https://pic.origapp.com/chromium-v123.0.1-pack.tar'
     )
-    console.log('executablePath', executablePath);
     const browser = await chromium.launch({
       args: chromiumBrowser.args,
       executablePath,
       headless: true,
     })
-    console.log('browser', browser);
     return browser
   }
 
@@ -150,7 +148,11 @@ export const POST = async (request: NextRequest) => {
       await page.fill('[data-automation-id="phone-number"]', '0348096333');
       // submit
       await page.waitForSelector('button[data-automation-id="bottom-navigation-next-button"]');
+      console.log('click');
+
       await page.click('button[data-automation-id="bottom-navigation-next-button"]');
+      await sleep(3000)
+      await page.waitForSelector('div[data-automation-id="workExperienceSection"]', { timeout: 60000});
     }
 
     const handleExperienceTab = async () => {
@@ -278,15 +280,15 @@ export const POST = async (request: NextRequest) => {
     console.log('=======Start Apply=====');
     await handleInformationTab()
     console.log('=======Complete Information Tab=====');
-    await handleExperienceTab()
-    console.log('=======Complete Experience Tab=====');
-    await handleApplicationQuestion()
-    console.log('=======Complete Application Question Tab=====');
-    await handleVoluntaryDisclosures()
-    console.log('=======Complete VoluntaryDisclosures Tab=====');
-    await handleSelfIdentity()
-    console.log('=======Complete Self Identity Tab=====');
-    await handleReviewPage()
+    // await handleExperienceTab()
+    // console.log('=======Complete Experience Tab=====');
+    // await handleApplicationQuestion()
+    // console.log('=======Complete Application Question Tab=====');
+    // await handleVoluntaryDisclosures()
+    // console.log('=======Complete VoluntaryDisclosures Tab=====');
+    // await handleSelfIdentity()
+    // console.log('=======Complete Self Identity Tab=====');
+    // await handleReviewPage()
     console.log('=======Complete Apply Job=====');
     await browser.close()
     return successResponse('success')
