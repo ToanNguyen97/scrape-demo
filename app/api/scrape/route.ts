@@ -153,6 +153,8 @@ export const POST = async (request: NextRequest) => {
       await page.click('button[data-automation-id="bottom-navigation-next-button"]');
       await sleep(3000)
       await page.waitForSelector('div[data-automation-id="workExperienceSection"]', { timeout: 60000});
+      console.log('1');
+
     }
 
     const handleExperienceTab = async () => {
