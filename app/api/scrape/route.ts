@@ -15,6 +15,7 @@ const sleep = (ms: number) => {
 }
 
 async function getBrowser() {
+  console.log('process.env.DEV_MODE', process.env.DEV_MODE);
   if (process.env.DEV_MODE !== 'local') {
     const executablePath = await chromiumBrowser.executablePath(
       'https://pic.origapp.com/chromium-v123.0.1-pack.tar'
