@@ -17,16 +17,21 @@ const sleep = (ms: number) => {
 async function getBrowser() {
   console.log('process.env.DEV_MODE', process.env.DEV_MODE);
   if (process.env.DEV_MODE !== 'local') {
+
     const executablePath = await chromiumBrowser.executablePath(
       'https://pic.origapp.com/chromium-v123.0.1-pack.tar'
     )
+    console.log('executablePath', executablePath);
+
     const browser = await chromium.launch({
       args: chromiumBrowser.args,
       executablePath,
       headless: true,
     })
+    console.log('browser', browser);
     return browser
   }
+
   const browser = await chromium.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
