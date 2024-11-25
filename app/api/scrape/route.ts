@@ -149,11 +149,13 @@ export const POST = async (request: NextRequest) => {
       // phone
       await page.waitForSelector('button[data-automation-id="phone-device-type"]');
       await page.click('button[data-automation-id="phone-device-type"]');
+      await sleep(1000)
       if (url.includes('drivetime.wd1.myworkdayjobs.com')) {
         await page.click('li[data-value="95b22ca12b3001147b9607896ff00000"]');
       } else {
         await page.click('li[data-value="2fb0b179b6741001f79840fe1d5b0000"]');
       }
+      await sleep(1000)
       await page.fill('[data-automation-id="phone-number"]', '0348096333');
       // submit
       await page.waitForSelector('button[data-automation-id="bottom-navigation-next-button"]');
@@ -161,11 +163,7 @@ export const POST = async (request: NextRequest) => {
 
       await page.click('button[data-automation-id="bottom-navigation-next-button"]');
       console.log('click xong');
-      const elementHtml = await page.evaluate(() => {
-        const element = document.querySelector('div[data-automation-id="workExperienceSection"]');
-        return element ? element.outerHTML : 'Element không tồn tại';
-      });
-      console.log(elementHtml);
+      await sleep(2000)
     }
 
     // const handleExperienceTab = async () => {
