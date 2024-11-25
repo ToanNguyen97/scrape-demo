@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server'
 import chromiumBrowser from '@sparticuz/chromium'
 import { errorResponse, successResponse } from '../responseHandler'
 import { chromium } from 'playwright'
-// import path from 'path';
+import path from 'path';
 
 export const maxDuration = 300
 
