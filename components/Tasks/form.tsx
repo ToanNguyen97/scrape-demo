@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-
+import { Loader2 } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { TaskFormValues, taskSchema } from "./schema"
@@ -10,10 +10,11 @@ import { Button } from "../ui/button"
 import { supabase } from "@/lib/supabase"
 import { Textarea } from "../ui/textarea"
 import { toast } from "sonner"
+import { useState } from "react"
 
 
 export const TaskForm = () => {
-  // 1. Define your form.
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
@@ -24,41 +25,44 @@ export const TaskForm = () => {
   })
 
   const onSubmit = async (values: TaskFormValues) => {
-    if (!values.url) return
-    const payload: any = {
-      email: values.email,
-      password: values.password,
-      url: values.url,
-    }
-    if (values.cover_letter) {
-      payload.cover_letter = values.cover_letter
-    }
-    if (values.resume_url) {
-      const resumeURL = await uploadFiles(values.resume_url)
-      payload.resume_url = resumeURL
-    }
+    setIsLoading(true)
     try {
-      const { data, error } = await supabase.from('tasks').insert({
-        ...payload,
-        status: 'Pending'
-      }).select().single()
-      if (error) {
-        throw error
+      if (values.url) {
+        const payload: any = {
+          email: values.email,
+          password: values.password,
+          url: values.url,
+        }
+        if (values.cover_letter) {
+          payload.cover_letter = values.cover_letter
+        }
+        if (values.resume_url) {
+          const resumeURL = await uploadFiles(values.resume_url)
+          payload.resume_url = resumeURL
+        }
+        const { data, error } = await supabase.from('tasks').insert({
+          ...payload,
+          status: 'Pending'
+        }).select().single()
+        if (error) {
+          throw error
+        }
+        payload.taskId = (data as any).id
+        const res = await fetch('/api/apify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        await res.json()
+        toast.success('Task has been created')
       }
-      payload.taskId = (data as any).id
-      const res = await fetch('/api/apify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      await res.json()
-      toast.success('Task has been created')
     } catch (error) {
       console.log('error', error);
       toast.error(error instanceof Error ? error.message : JSON.stringify(error))
     }
+    setIsLoading(false)
   }
 
   const uploadFiles = async (file: File) => {
@@ -165,7 +169,10 @@ export const TaskForm = () => {
           )}
         />
         <div className="text-right">
-          <Button type="submit">Create Task</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? <Loader2 className="animate-spin" /> : null}
+            Create Task
+          </Button>
         </div>
       </form>
     </Form>
