@@ -2,6 +2,11 @@
 const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@sparticuz/chromium']
+  },
+  images: {
+    domains: [
+      'pic.origapp.com',
+    ],
   }
 };
 

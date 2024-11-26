@@ -1,31 +1,52 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { columns, Task } from "@/components/Tasks/column";
+import { TaskForm } from "@/components/Tasks/form";
+import { DataTable } from "@/components/Tasks/table";
+import { supabase } from "@/lib/supabase";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [url, setUrl] = useState('')
-  const handleScrape = async () => {
+  const [tasks, setTasks] = useState<Task[]>([])
+
+  const handleFetchTasks = async () => {
     try {
-      if (!url) return
-      const res = await fetch('/api/scrape', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url })
-      })
-      const data = await res.json()
-      console.log('data', data);
+      const { data } = await supabase
+      .from('tasks')
+      .select()
+      .order('created_at', { ascending: false })
+      if (data?.length) {
+        setTasks(data)
+      }
     } catch (error) {
       console.log('error', error);
     }
   }
+
+  useEffect(() => {
+    handleFetchTasks()
+    const channel = supabase.channel('tasks')
+    channel
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'tasks' }, (payload) => {
+      console.log('realtime', payload);
+
+      handleFetchTasks()
+    })
+    .subscribe()
+
+    return () => {
+      channel.unsubscribe()
+    }
+  }, [])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="container mx-auto py-8">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Input value={url} onChange={e => setUrl(e.target.value)} placeholder="enter url" />
-        <Button onClick={handleScrape}>Scrape</Button>
+        <TaskForm/>
+        <section className="w-full">
+          <h2 className="font-bold mb-3">Tasks</h2>
+          <DataTable data={tasks} columns={columns}/>
+        </section>
       </main>
     </div>
   );
