@@ -108,7 +108,10 @@ export const columns: ColumnDef<Task>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status: string = row.getValue("status")
-      const isCompleted = ['Pending','Failed', 'Completed'].includes(status)
+      if (status === 'Pending') {
+        return <div className="flex justify-center">-</div>
+      }
+        const isCompleted = ['Failed', 'Completed'].includes(status)
       return (
         <div className="flex justify-center">{isCompleted ? 'Done' : <LoadingSpinner className="w-5 h-5 text-cyan-500"/>}</div>
       )
