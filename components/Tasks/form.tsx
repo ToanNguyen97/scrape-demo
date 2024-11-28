@@ -17,11 +17,6 @@ export const TaskForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
-    defaultValues: {
-      email: "toannguyen210597@gmail.com",
-      password: "Toan123456!",
-      url: "https://drivetime.wd1.myworkdayjobs.com/en-US/DriveTime/job/Dallas-Headquarters/Product-Manager--Servicing_R10155/",
-    },
   })
 
   const onSubmit = async (values: TaskFormValues) => {
