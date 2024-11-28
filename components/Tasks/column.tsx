@@ -95,7 +95,7 @@ export const columns: ColumnDef<Task>[] = [
         <div className="text-red-500 max-w-[150px] line-clamp-2">
           <Popover>
             <PopoverTrigger>
-              <Button variant="outline">Click View Detail</Button>
+              <Button variant="outline" size="sm">Click View Detail</Button>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] h-[300px] overflow-hidden overflow-y-auto">{error}</PopoverContent>
           </Popover>
