@@ -114,7 +114,7 @@ export const TaskForm = () => {
             name="url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL</FormLabel>
+                <FormLabel>Job URL</FormLabel>
                 <FormControl>
                   <Input placeholder="url" {...field} />
                 </FormControl>
