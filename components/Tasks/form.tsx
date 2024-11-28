@@ -86,7 +86,7 @@ export const TaskForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Email (Create new account or use exist account)</FormLabel>
                 <FormControl>
                   <Input placeholder="email" {...field} />
                 </FormControl>

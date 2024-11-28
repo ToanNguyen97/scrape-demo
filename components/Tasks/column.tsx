@@ -8,6 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Button } from "../ui/button"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -93,7 +94,9 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div className="text-red-500 max-w-[150px] line-clamp-2">
           <Popover>
-            <PopoverTrigger>View Detail</PopoverTrigger>
+            <PopoverTrigger>
+              <Button variant="outline">Click View Detail</Button>
+            </PopoverTrigger>
             <PopoverContent className="w-[300px] h-[300px] overflow-hidden overflow-y-auto">{error}</PopoverContent>
           </Popover>
         </div>
