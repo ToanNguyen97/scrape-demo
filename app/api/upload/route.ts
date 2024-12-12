@@ -7,8 +7,6 @@ import {
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { NextRequest } from 'next/server';
 
-export const maxDuration = 300
-
 const S3 = new S3Client({
   region: "auto",
   endpoint: `https://${process.env.R2_ACCOUNT_ID!}.r2.cloudflarestorage.com`,

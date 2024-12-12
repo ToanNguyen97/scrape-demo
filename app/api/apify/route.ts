@@ -6,7 +6,6 @@ const client = new ApifyClient({
     token: 'apify_api_h68gAHh6ts7AQhrBl0EYM6kk7DlRQE2JFIal',
     timeoutSecs: 360,
 });
-export const maxDuration = 300
 
 interface ApifyPayload {
   url: string,

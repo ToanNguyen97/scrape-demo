@@ -5,8 +5,6 @@ import { chromium } from 'playwright'
 import * as fs from 'fs'
 import axios from 'axios';
 
-export const maxDuration = 300
-
 interface ScrapePayload {
   url: string
 }
